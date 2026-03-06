@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Sharma Furniture</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Product Page Specific Styles */
+        .product-detail-page {
+            padding: 40px 0 80px;
+            background: #fff;
+        }
+        
+        .product-detail-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .product-breadcrumb {
+            padding: 20px 0;
+            color: #8C7A6B;
+            font-size: 0.9rem;
+        }
+        
+        .product-breadcrumb a {
+            color: #8C7A6B;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .product-breadcrumb a:hover {
+            color: #C8A96A;
+        }
+        
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        
+        /* Gallery Styles */
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            background: #f8f8f8;
+            cursor: zoom-in;
+        }
+        
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .main-image-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .thumbnail-item {
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail-item.active {
+            opacity: 1;
+            border-color: #C8A96A;
+        }
+        
+        .thumbnail-item:hover {
+            opacity: 1;
+        }
+        
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Product Info Styles */
+        .product-info-detailed {
+            padding: 20px 0;
+        }
+        
+        .product-category-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #C8A96A;
+            background: #F5F0E8;
+            padding: 5px 15px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .product-title-large {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: #1F2A44;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .product-rating-detailed {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #E5DDD5;
+        }
+        
+        .stars-large {
+            color: #C8A96A;
+            font-size: 1.2rem;
+        }
+        
+        .reviews-count {
+            color: #8C7A6B;
+            font-size: 0.9rem;
+        }
+        
+        .price-large {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #C8A96A;
+            margin-bottom: 25px;
+        }
+        
+        .product-description-detailed {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: #4a4a4a;
+            font-size: 1rem;
+        }
+        
+        /* Key Features */
+        .key-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #F9F9F9;
+            border-radius: 15px;
+        }
+        
+        .key-feature-item {
+            text-align: center;
+        }
+        
+        .key-feature-item i {
+            font-size: 1.5rem;
+            color: #C8A96A;
+            margin-bottom: 10px;
+        }
+        
+        .key-feature-item span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1F2A44;
+        }
+        
+        .key-feature-item small {
+            font-size: 0.8rem;
+            color: #8C7A6B;
+        }
+        
+        /* Specifications Table */
+        .specs-detailed {
+            margin-bottom: 30px;
+        }
+        
+        .specs-detailed h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #1F2A44;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .spec-label {
+            font-size: 0.8rem;
+            color: #8C7A6B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .spec-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1F2A44;
+            margin-top: 5px;
+        }
+        
+        /* Color Options */
+        .color-section {
+            margin-bottom: 30px;
+        }
+        
+        .color-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #1F2A44;
+        }
+        
+        .color-options-detailed {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .color-chip {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .color-chip:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-chip.active {
+            border-color: #C8A96A;
+            box-shadow: 0 0 0 2px #C8A96A;
+        }
+        
+        /* Quantity and Actions */
+        .purchase-actions {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .quantity-selector-premium {
+            display: flex;
+            align-items: center;
+            border: 1px solid #E5DDD5;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .quantity-selector-premium button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quantity-selector-premium button:hover {
+            background: #1F2A44;
+            color: white;
+        }
+        
+        .quantity-selector-premium input {
+            width: 80px;
+            height: 50px;
+            border: none;
+            border-left: 1px solid #E5DDD5;
+            border-right: 1px solid #E5DDD5;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .add-to-cart-premium {
+            flex: 1;
+            height: 50px;
+            background: #1F2A44;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .add-to-cart-premium:hover {
+            background: #C8A96A;
+            color: #1F2A44;
+        }
+        
+        .add-to-cart-premium i {
+            font-size: 1.1rem;
+        }
+        
+        /* Contact Options */
+        .contact-options-premium {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-btn-premium {
+            flex: 1;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn-premium.phone {
+            background: #25D366;
+            color: white;
+        }
+        
+        .contact-btn-premium.whatsapp {
+            background: #1F2A44;
+            color: white;
+        }
+        
+        .contact-btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Delivery Info */
+        .delivery-info-premium {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background: #F5F0E8;
+            border-radius: 15px;
+        }
+        
+        .delivery-item-premium {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .delivery-item-premium i {
+            font-size: 1.5rem;
+            color: #C8A96A;
+        }
+        
+        .delivery-item-premium h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #1F2A44;
+        }
+        
+        .delivery-item-premium p {
+            font-size: 0.8rem;
+            color: #8C7A6B;
+        }
+        
+        /* Tabs Section */
+        .product-tabs {
+            margin: 60px 0;
+            border-top: 1px solid #E5DDD5;
+            padding-top: 40px;
+        }
+        
+        .tab-headers {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #E5DDD5;
+        }
+        
+        .tab-header {
+            padding: 15px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #8C7A6B;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tab-header.active {
+            color: #1F2A44;
+        }
+        
+        .tab-header.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #C8A96A;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        /* Specifications Tab */
+        .specs-full-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .spec-group {
+            margin-bottom: 20px;
+        }
+        
+        .spec-group h4 {
+            font-size: 1.1rem;
+            color: #1F2A44;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #E5DDD5;
+        }
+        
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #E5DDD5;
+        }
+        
+        .spec-row .label {
+            color: #8C7A6B;
+        }
+        
+        .spec-row .value {
+            font-weight: 600;
+            color: #1F2A44;
+        }
+        
+        /* Reviews Tab */
+        .reviews-summary-detailed {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #F9F9F9;
+            border-radius: 15px;
+        }
+        
+        .average-rating-large {
+            text-align: center;
+        }
+        
+        .average-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1F2A44;
+            line-height: 1;
+        }
+        
+        .total-reviews {
+            color: #8C7A6B;
+            font-size: 0.9rem;
+        }
+        
+        .rating-bars {
+            flex: 1;
+        }
+        
+        .rating-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .rating-bar-item span {
+            min-width: 60px;
+            color: #8C7A6B;
+        }
+        
+        .bar {
+            flex: 1;
+            height: 8px;
+            background: #E5DDD5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            background: #C8A96A;
+            border-radius: 4px;
+        }
+        
+        .review-cards-detailed {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .review-card-detailed {
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .review-header-detailed {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer-info h4 {
+            font-size: 1rem;
+            color: #1F2A44;
+            margin-bottom: 5px;
+        }
+        
+        .reviewer-info span {
+            font-size: 0.8rem;
+            color: #8C7A6B;
+        }
+        
+        .review-rating {
+            color: #C8A96A;
+        }
+        
+        .review-text {
+            line-height: 1.8;
+            color: #4a4a4a;
+        }
+        
+        /* Related Products */
+        .related-products-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #E5DDD5;
+        }
+        
+        .related-products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .related-product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .related-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .related-product-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        
+        .related-product-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .related-product-info h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #1F2A44;
+        }
+        
+        .related-product-info .price {
+            color: #C8A96A;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 992px) {
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .product-gallery {
+                position: static;
+            }
+            
+            .related-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .specs-full-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-title-large {
+                font-size: 2rem;
+            }
+            
+            .key-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .purchase-actions {
+                flex-direction: column;
+            }
+            
+            .contact-options-premium {
+                flex-direction: column;
+            }
+            
+            .reviews-summary-detailed {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .related-products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="luxury-header">
+        <div class="header-top">
+            <div class="header-contact">
+                <a href="tel:8630042048"><i class="fas fa-phone"></i> 8630042048</a>
+                <a href="mailto:sharmafurniture.store0@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://maps.app.goo.gl/k7aq9BwJpHhvkXzFA" target="_blank"><i class="fas fa-map-marker-alt"></i> Showroom</a>
+            </div>
+            <div class="header-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h1>Sharma Furniture<span class="logo-accent">.</span></h1>
+                    <p class="logo-tagline">Crafted for Generations</p>
+                </a>
+            </div>
+            <div class="header-actions">
+                <a href="#" class="header-icon" id="searchToggle"><i class="fas fa-search"></i></a>
+                <a href="#" class="header-icon" id="cartIconHeader"><i class="fas fa-shopping-bag"></i><span class="cart-count-header" id="cartCountHeader">0</span></a>
+                <a href="#" class="header-icon menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></a>
+            </div>
+        </div>
+        
+        <nav class="luxury-nav" id="mainNav">
+            <ul>
+                <li><a href="index.html#living" class="nav-link" data-category="Sofa Sets">Living Room</a></li>
+                <li><a href="index.html#bedroom" class="nav-link" data-category="Beds & Bed Frames">Bedroom</a></li>
+                <li><a href="index.html#dining" class="nav-link" data-category="Dining Tables & Dining Sets">Dining</a></li>
+                <li><a href="index.html#kitchen" class="nav-link" data-category="Modular Kitchen Cabinets">Modular Kitchen</a></li>
+                <li><a href="index.html#office" class="nav-link" data-category="Office Tables & Chairs">Home Office</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay-modern" id="searchOverlay">
+        <div class="search-container-modern">
+            <i class="fas fa-times close-search-modern" id="closeSearch"></i>
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search for furniture..." autocomplete="off">
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div class="product-detail-page">
+        <div class="product-detail-container">
+            <!-- Breadcrumb -->
+            <div class="product-breadcrumb" id="breadcrumb">
+                <a href="index.html">Home</a> / <a href="#" id="breadcrumbCategory"></a> / <span id="breadcrumbProduct"></span>
+            </div>
+
+            <!-- Product Main Section -->
+            <div class="product-main">
+                <!-- Left Column - Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image-container" id="mainImageContainer">
+                        <img id="mainProductImage" src="" alt="Product Image">
+                    </div>
+                    <div class="thumbnail-grid" id="thumbnailGrid"></div>
+                </div>
+
+                <!-- Right Column - Product Info -->
+                <div class="product-info-detailed">
+                    <span class="product-category-badge" id="productCategory"></span>
+                    <h1 class="product-title-large" id="productName"></h1>
+                    
+                    <div class="product-rating-detailed">
+                        <div class="stars-large" id="productRating"></div>
+                        <span class="reviews-count" id="reviewsCount"></span>
+                    </div>
+
+                    <div class="price-large" id="productPrice"></div>
+                    
+                    <div class="product-description-detailed" id="productDescription"></div>
+
+                    <!-- Key Features -->
+                    <div class="key-features">
+                        <div class="key-feature-item">
+                            <i class="fas fa-award"></i>
+                            <span>Premium Quality</span>
+                            <small>Best materials</small>
+                        </div>
+                        <div class="key-feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Warranty</span>
+                            <small id="featureWarranty">5 Years</small>
+                        </div>
+                        <div class="key-feature-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Free Delivery</span>
+                            <small>On orders > ₹25k</small>
+                        </div>
+                    </div>
+
+                    <!-- Quick Specs -->
+                    <div class="specs-detailed">
+                        <h3>Quick Specifications</h3>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Material</span>
+                                <span class="spec-value" id="specMaterial"></span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Warranty</span>
+                                <span class="spec-value" id="specWarranty"></span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Assembly</span>
+                                <span class="spec-value">Free Professional</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Delivery</span>
+                                <span class="spec-value">3-5 Days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Options -->
+                    <div class="color-section">
+                        <h3>Available Colors</h3>
+                        <div class="color-options-detailed" id="colorOptions"></div>
+                    </div>
+
+                    <!-- Purchase Actions -->
+                    <div class="purchase-actions">
+                        <div class="quantity-selector-premium">
+                            <button id="decreaseQty">−</button>
+                            <input type="number" id="quantity" value="1" min="1" max="10">
+                            <button id="increaseQty">+</button>
+                        </div>
+                        <button class="add-to-cart-premium" id="addToCartBtn">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+
+                    <!-- Contact Options -->
+                    <div class="contact-options-premium">
+                        <a href="tel:8630042048" class="contact-btn-premium phone">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                        <a href="#" class="contact-btn-premium whatsapp" id="contactWhatsApp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+
+                    <!-- Delivery Info -->
+                    <div class="delivery-info-premium">
+                        <div class="delivery-item-premium">
+                            <i class="fas fa-calendar-check"></i>
+                            <div>
+                                <h4>Easy Returns</h4>
+                                <p>7-day return policy</p>
+                            </div>
+                        </div>
+                        <div class="delivery-item-premium">
+                            <i class="fas fa-lock"></i>
+                            <div>
+                                <h4>Secure Payment</h4>
+                                <p>100% secure</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="product-tabs">
+                <div class="tab-headers">
+                    <div class="tab-header active" data-tab="details">Details</div>
+                    <div class="tab-header" data-tab="specifications">Specifications</div>
+                    <div class="tab-header" data-tab="reviews">Reviews</div>
+                    <div class="tab-header" data-tab="shipping">Shipping</div>
+                </div>
+
+                <!-- Details Tab -->
+                <div class="tab-content active" id="tab-details">
+                    <div class="product-description-detailed" style="font-size: 1.1rem; line-height: 1.8;" id="fullDescription"></div>
+                </div>
+
+                <!-- Specifications Tab -->
+                <div class="tab-content" id="tab-specifications">
+                    <div class="specs-full-grid">
+                        <div class="spec-group">
+                            <h4>Materials & Construction</h4>
+                            <div class="spec-row">
+                                <span class="label">Primary Material</span>
+                                <span class="value" id="fullMaterial"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="label">Finish Type</span>
+                                <span class="value">Premium Matte</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="label">Frame Material</span>
+                                <span class="value">Solid Wood</span>
+                            </div>
+                        </div>
+                        <div class="spec-group">
+                            <h4>Dimensions</h4>
+                            <div class="spec-row">
+                                <span class="label">Width</span>
+                                <span class="value">200 cm</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="label">Depth</span>
+                                <span class="value">90 cm</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="label">Height</span>
+                                <span class="value">85 cm</span>
+                            </div>
+                        </div>
+                        <div class="spec-group">
+                            <h4>Warranty & Care</h4>
+                            <div class="spec-row">
+                                <span class="label">Warranty Period</span>
+                                <span class="value" id="warrantyPeriod"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="label">Care Instructions</span>
+                                <span class="value">Wipe with dry cloth</span>
+                            </div>
+                        </div>
+                        <div class="spec-group">
+                            <h4>Assembly</h4>
+                            <div class="spec-row">
+                                <span class="label">Assembly Required</span>
+                                <span class="value">Yes (Free)</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="label">Tools Provided</span>
+                                <span class="value">Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-content" id="tab-reviews">
+                    <div class="reviews-summary-detailed">
+                        <div class="average-rating-large">
+                            <div class="average-number" id="avgRating">4.8</div>
+                            <div class="stars-large" id="avgRatingStars"></div>
+                            <div class="total-reviews" id="totalReviews"></div>
+                        </div>
+                        <div class="rating-bars">
+                            <div class="rating-bar-item">
+                                <span>5 star</span>
+                                <div class="bar"><div class="bar-fill" style="width: 80%"></div></div>
+                                <span>80%</span>
+                            </div>
+                            <div class="rating-bar-item">
+                                <span>4 star</span>
+                                <div class="bar"><div class="bar-fill" style="width: 15%"></div></div>
+                                <span>15%</span>
+                            </div>
+                            <div class="rating-bar-item">
+                                <span>3 star</span>
+                                <div class="bar"><div class="bar-fill" style="width: 3%"></div></div>
+                                <span>3%</span>
+                            </div>
+                            <div class="rating-bar-item">
+                                <span>2 star</span>
+                                <div class="bar"><div class="bar-fill" style="width: 1%"></div></div>
+                                <span>1%</span>
+                            </div>
+                            <div class="rating-bar-item">
+                                <span>1 star</span>
+                                <div class="bar"><div class="bar-fill" style="width: 1%"></div></div>
+                                <span>1%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-cards-detailed" id="reviewsList"></div>
+                </div>
+
+                <!-- Shipping Tab -->
+                <div class="tab-content" id="tab-shipping">
+                    <div style="padding: 20px; background: #F9F9F9; border-radius: 15px;">
+                        <h3 style="margin-bottom: 20px;">Delivery Information</h3>
+                        <p style="margin-bottom: 15px;">• Free delivery on orders above ₹25,000</p>
+                        <p style="margin-bottom: 15px;">• Standard delivery: 3-5 business days</p>
+                        <p style="margin-bottom: 15px;">• Express delivery available at extra cost</p>
+                        <p style="margin-bottom: 15px;">• Professional assembly included free</p>
+                        <p>• Easy 7-day return policy</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products-section">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="related-products-grid" id="relatedProducts"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING BUTTONS -->
+    <div class="floating-wa" id="waButton">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+    
+    <div class="floating-cart" id="cartButton">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- CART DRAWER -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer-luxury" id="cartDrawer">
+        <div class="drawer-header">
+            <h3>Shopping Bag</h3>
+            <span class="close-cart" id="closeCartBtn">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItemsContainer"></div>
+        <div class="cart-bottom">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">₹0</span>
+            </div>
+            <div class="grand-total">
+                <span>Total</span>
+                <span id="grandTotal">₹0</span>
+            </div>
+            <button class="btn-checkout" id="placeOrderBtn">Proceed to Checkout</button>
+            <button class="btn-continue" id="continueShopping">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <h3>Complete Your Order</h3>
+            <form id="orderForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Full Name *" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Phone Number *" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="address" placeholder="Delivery Address *" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea id="instructions" placeholder="Special Instructions (optional)" rows="2"></textarea>
+                </div>
+                <div class="order-summary" id="modalOrderSummary"></div>
+                <button type="submit" class="btn-submit-order">Place Order</button>
+            </form>
+            <div id="orderSuccess" style="display: none;" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h4>Order Placed Successfully!</h4>
+                <p>Sharma Furniture will contact you on WhatsApp to confirm.</p>
+                <a href="https://wa.me/918630042048" class="wa-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat with us
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
