@@ -5,16 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details - Sharma Furniture</title>
     
-    <!-- Google Fonts -->
+    <!-- Browser Caching for faster repeat visits -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    
+    <!-- Preconnect for faster loading of external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Google Fonts with display=swap for instant text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome - Preload for better performance -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Custom CSS -->
+    <!-- Custom CSS - Preload for faster rendering -->
+    <link rel="preload" href="css/style.css" as="style">
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Product Page Specific Styles - Kept exactly as you had them -->
     <style>
         /* Product Page Specific Styles */
         .product-detail-page {
@@ -747,10 +759,10 @@
 
             <!-- Product Main Section -->
             <div class="product-main">
-                <!-- Left Column - Gallery -->
+                <!-- Left Column - Gallery (with optimized image sizes) -->
                 <div class="product-gallery">
                     <div class="main-image-container" id="mainImageContainer">
-                        <img id="mainProductImage" src="" alt="Product Image">
+                        <img id="mainProductImage" src="" alt="Product Image" loading="eager">
                     </div>
                     <div class="thumbnail-grid" id="thumbnailGrid"></div>
                 </div>
@@ -1054,7 +1066,7 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <!-- JavaScript - DEFERRED for faster loading -->
+    <script src="js/script.js" defer></script>
 </body>
 </html>
